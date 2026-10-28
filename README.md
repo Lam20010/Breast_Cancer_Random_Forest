@@ -2,7 +2,7 @@
 
 A machine learning project that uses a **Random Forest Classifier** to predict whether a breast tumor is **benign** or **malignant** from measurements of cell nuclei.
 
-This is a group mini project for *Classification Algorithms Exploration*. We explain how the algorithm works, explore the dataset, then train, tune and evaluate the model. We also compare it with four other classifiers.
+This is a group mini project for Classification Algorithms Exploration. We explain how the algorithm works, explore the dataset, then train, tune and evaluate the model. We also compare it with four other classifiers.
 
 ## Team
 
