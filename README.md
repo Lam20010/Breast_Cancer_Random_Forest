@@ -77,7 +77,7 @@ Breast_Cancer_Random_Forest/
 9. **Model Comparison (Bonus):** against Decision Tree, Logistic Regression, KNN and SVM.
 10. **Conclusion:** results, key insights, limitations and future work.
 
-A clickable table of contents is at the end of the notebook.
+
 
 ## Approach
 
