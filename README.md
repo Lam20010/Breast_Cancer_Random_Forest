@@ -9,7 +9,7 @@ This is a group mini project for Classification Algorithms Exploration. We expla
 - Lama Aldhalaan
 - Ghadi Alshahrani
 - Khalid Alotaibi
-- Omar Mohammed
+- Omar Alfaifi
 
 ## Results at a Glance
 
