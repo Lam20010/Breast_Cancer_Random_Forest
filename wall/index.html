@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Messages of Hope</title>
+<meta name="description" content="A live wall of messages of hope and awareness about breast cancer.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 34'%3E%3Cpath d='M13 3c-4 0-7 3-7 7 0 3 2 6 4 9L3 31l5 1 5-8 5 8 5-1-7-12c2-3 4-6 4-9 0-4-3-7-7-7zm0 4c2 0 3 1.4 3 3 0 1.6-1.4 4-3 6.4C11.4 14 10 11.6 10 10c0-1.6 1-3 3-3z' fill='%23C2185B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;500;600;700&family=Caveat:wght@500;700&display=swap">
+<style>
+:root {
+  --blush: #FFF0F4; --paper: #FFFAFC; --rasp: #C2185B; --rasp-deep: #8E0F43;
+  --hema: #5B2A86; --ink: #3A0B22; --soft: #7A4560; --line: #EBC3D2;
+  --n1: #FFD3E2; --n2: #F9B9D0; --n3: #FFE6EE; --n4: #E9DAF7; --n5: #FFC9D9;
+  --display: 'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+  --body: 'Figtree', 'Segoe UI', Arial, sans-serif;
+  --hand: 'Caveat', 'Segoe Print', 'Comic Sans MS', cursive;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { margin: 0; background: var(--blush); color: var(--ink); font-family: var(--body); font-size: 17px; line-height: 1.45;
+  padding: 18px max(16px, env(safe-area-inset-right)) 40px max(16px, env(safe-area-inset-left));
+  background-image: radial-gradient(rgba(194,24,91,.07) 1.5px, transparent 1.5px); background-size: 22px 22px; }
+button, input, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+button:focus-visible, textarea:focus-visible, input:focus-visible { outline: 3px solid var(--hema); outline-offset: 2px; }
+.wrap { max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+header { display: flex; align-items: center; gap: 16px 20px; flex-wrap: wrap; background: var(--paper); border: 2px solid var(--line); border-radius: 26px; padding: 18px 22px; }
+.ttl { flex: 1; min-width: 240px; display: flex; flex-direction: column; gap: 4px; }
+h1 { margin: 0; font-family: var(--display); font-weight: 800; font-size: clamp(32px, 4.5vw, 58px); line-height: 1; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+h1 em { font-style: normal; color: var(--rasp); }
+.ttl p { margin: 0; color: var(--soft); font-size: 18px; }
+.count { font-family: var(--display); font-weight: 700; color: var(--rasp); display: inline-block; }
+.btn { background: var(--rasp); color: #FFF0F4; border: none; border-radius: 999px; padding: 14px 26px; font-family: var(--display); font-weight: 700; font-size: 20px; box-shadow: 0 5px 0 var(--rasp-deep); white-space: nowrap; }
+.btn:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--rasp-deep); }
+.btn[disabled] { opacity: .5; cursor: default; }
+.ghost { background: none; border: 2px solid var(--rasp); color: var(--rasp); border-radius: 999px; padding: 11px 18px; font-weight: 700; white-space: nowrap; }
+.composer { background: var(--paper); border: 2px solid var(--line); border-radius: 26px; padding: 22px; display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 22px; align-items: start; }
+.composer h2 { margin: 0 0 6px; font-family: var(--display); font-size: 28px; }
+textarea { width: 100%; min-height: 140px; resize: vertical; border: 2px solid var(--line); border-radius: 16px; padding: 14px 16px; font-family: var(--hand); font-size: 30px; line-height: 1.15; background: var(--n1); }
+input { width: 100%; border: 2px solid var(--line); border-radius: 12px; padding: 10px 14px; background: #fff; font-size: 17px; }
+label, .lbl { font-weight: 700; font-size: 16px; display: block; margin-bottom: 6px; }
+.meta { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; color: var(--soft); margin-top: 6px; }
+.swatches { display: flex; gap: 10px; flex-wrap: wrap; }
+.swatches button { width: 40px; height: 40px; border-radius: 10px; border: 2px solid rgba(58,11,34,.15); }
+.swatches button.sel { outline: 3px solid var(--rasp); outline-offset: 2px; }
+.side { display: flex; flex-direction: column; gap: 16px; }
+.status { margin: 0; min-height: 22px; font-weight: 600; font-size: 15px; color: var(--hema); }
+.status.err { color: var(--rasp); }
+.ideas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.ideas button { background: #fff; border: 1.5px dashed var(--line); border-radius: 999px; padding: 6px 14px; font-size: 15px; color: var(--soft); }
+.board { columns: 280px; column-gap: 22px; }
+.note { break-inside: avoid; margin: 0 0 22px; padding: 22px 22px 16px; border-radius: 4px 4px 18px 4px; box-shadow: 0 10px 22px rgba(90,20,50,.13), 0 2px 4px rgba(90,20,50,.08); position: relative; transform: rotate(var(--rot, 0deg)); display: flex; flex-direction: column; gap: 12px; }
+.note::before { content: ""; position: absolute; top: -10px; left: 50%; width: 84px; height: 22px; margin-left: -42px; background: rgba(255,255,255,.55); border: 1px solid rgba(194,24,91,.12); transform: rotate(-2deg); }
+.note p { margin: 0; font-family: var(--hand); font-size: 31px; line-height: 1.12; overflow-wrap: anywhere; }
+.note .by { font-size: 15px; font-weight: 600; color: var(--soft); display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 30px; }
+.note .x { background: rgba(255,255,255,.6); border: none; border-radius: 999px; width: 30px; height: 30px; font-size: 18px; line-height: 1; color: var(--rasp-deep); }
+.note.new { animation: drop .6s cubic-bezier(.2,.9,.3,1.3); }
+@keyframes drop { from { opacity: 0; transform: translateY(-30px) scale(.85) rotate(-6deg); } }
+.empty { text-align: center; padding: 70px 20px; color: var(--soft); border: 2.5px dashed var(--line); border-radius: 26px; background: rgba(255,250,252,.7); }
+.empty h2 { margin: 0 0 8px; font-family: var(--display); font-size: 32px; color: var(--ink); }
+.notice { margin: 0; background: #EEE3F7; color: var(--hema); border-radius: 16px; padding: 14px 18px; font-weight: 600; }
+footer { text-align: center; font-size: 14px; color: var(--soft); display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+footer button { background: none; border: none; color: var(--soft); text-decoration: underline; font-size: 14px; }
+[hidden] { display: none !important; }
+@media (max-width: 760px) { .composer { grid-template-columns: 1fr; } .note p { font-size: 27px; } }
+@media (prefers-reduced-motion: reduce) { .note.new { animation: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="ttl">
+      <h1><svg width="34" height="46" viewBox="0 0 26 34" aria-hidden="true"><path d="M13 3c-4 0-7 3-7 7 0 3 2 6 4 9L3 31l5 1 5-8 5 8 5-1-7-12c2-3 4-6 4-9 0-4-3-7-7-7zm0 4c2 0 3 1.4 3 3 0 1.6-1.4 4-3 6.4C11.4 14 10 11.6 10 10c0-1.6 1-3 3-3z" fill="#C2185B"/></svg>Messages of <em>hope</em></h1>
+      <p>Leave a note of support or awareness about breast cancer. <span class="count" id="count"></span></p>
+    </div>
+    <button class="ghost" id="copyBtn">Copy link</button>
+    <button class="btn" id="addBtn">Add a note</button>
+  </header>
+
+  <form class="composer" id="composer" hidden>
+    <div>
+      <h2>Your note</h2>
+      <textarea id="text" maxlength="160" placeholder="Write something kind…" aria-label="Your message"></textarea>
+      <div class="meta"><span>Keep it short and kind.</span><span id="left">160</span></div>
+      <div class="ideas" id="ideas"></div>
+    </div>
+    <div class="side">
+      <div><label for="name">Your name (optional)</label><input id="name" maxlength="40" placeholder="e.g. Sara" autocomplete="off"></div>
+      <div><span class="lbl">Note colour</span><div class="swatches" id="swatches"></div></div>
+      <button class="btn" type="submit" id="postBtn">Post to the wall</button>
+      <button class="ghost" type="button" id="cancelBtn">Cancel</button>
+      <p class="status" id="status" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <p class="notice" id="notice" hidden></p>
+  <section class="board" id="board" aria-live="polite"></section>
+  <div class="empty" id="empty">
+    <h2>The wall is waiting for its first note</h2>
+    <p>Press “Add a note” to write a message of hope.</p>
+  </div>
+  <footer>
+    <span>Notes stay on the wall for about 12 hours.</span>
+    <button id="modBtn">Presenter: hide notes</button>
+  </footer>
+</div>
+
+<script>
+// Notes travel through ntfy.sh (free, open-source, no accounts). The topic name is the "room" for this wall.
+const TOPIC = 'bc-hope-wall-nnjaxmmx5om0bp';
+const BASE = 'https://ntfy.sh/' + TOPIC;
+const COLORS = ['--n1', '--n2', '--n3', '--n4', '--n5'];
+const IDEAS = ['You are stronger than you know.', 'Early detection saves lives.', 'No one fights alone. 🎀', 'Check yourself every month.', 'Sending love to every fighter and survivor.'];
+const $ = id => document.getElementById(id);
+const notes = new Map();      // id -> {text,name,color,rot,time}
+let color = COLORS[0], ready = false, modMode = false;
+const store = { get(k, d) { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
+const hidden = new Set(store.get('hiddenNotes', []));
+
+/* ---------- composer ---------- */
+$('swatches').innerHTML = COLORS.map((c, i) => `<button type="button" data-c="${c}" aria-label="Colour ${i + 1}" style="background:var(${c})" class="${i ? '' : 'sel'}"></button>`).join('');
+$('swatches').querySelectorAll('button').forEach(b => b.onclick = () => {
+  color = b.dataset.c; $('swatches').querySelectorAll('button').forEach(x => x.classList.toggle('sel', x === b));
+  $('text').style.background = `var(${color})`;
+});
+IDEAS.forEach(t => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.onclick = () => { $('text').value = t; updateLeft(); $('text').focus(); }; $('ideas').appendChild(b); });
+function updateLeft() { $('left').textContent = 160 - $('text').value.length; }
+$('text').addEventListener('input', updateLeft);
+function openComposer() { $('composer').hidden = false; $('addBtn').hidden = true; $('text').focus(); $('composer').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+function closeComposer() { $('composer').hidden = true; $('addBtn').hidden = false; $('status').textContent = ''; }
+$('addBtn').onclick = openComposer;
+$('cancelBtn').onclick = closeComposer;
+
+$('composer').addEventListener('submit', async e => {
+  e.preventDefault();
+  const text = $('text').value.trim(), name = $('name').value.trim(), st = $('status');
+  st.className = 'status';
+  if (!text) { st.className = 'status err'; st.textContent = 'Write a message first.'; return; }
+  $('postBtn').disabled = true; st.textContent = 'Posting…';
+  const body = JSON.stringify({ app: 'hope-wall', text: text.slice(0, 160), name: name.slice(0, 40), color, rot: +(Math.random() * 5 - 2.5).toFixed(2) });
+  try {
+    const r = await fetch(BASE, { method: 'POST', body });
+    if (!r.ok) throw new Error(r.status === 429 ? 'busy' : 'http');
+    $('text').value = ''; updateLeft(); st.textContent = 'Posted! Look at the wall. 🎀';
+    setTimeout(closeComposer, 1400);
+  } catch (err) {
+    st.className = 'status err';
+    st.textContent = err.message === 'busy' ? 'Lots of notes right now. Wait a few seconds and try again.' : 'That didn’t post. Check your internet connection and try again.';
+  } finally { $('postBtn').disabled = false; }
+});
+
+/* ---------- copy link ---------- */
+$('copyBtn').onclick = async () => {
+  const url = location.href.split('#')[0], b = $('copyBtn');
+  try { await navigator.clipboard.writeText(url); b.textContent = 'Link copied!'; } catch (e) { b.textContent = url; }
+  setTimeout(() => { b.textContent = 'Copy link'; }, 2500);
+};
+
+/* ---------- presenter moderation (hides notes on this screen only) ---------- */
+$('modBtn').onclick = () => { modMode = !modMode; $('modBtn').textContent = modMode ? 'Done hiding notes' : 'Presenter: hide notes'; render(); };
+
+/* ---------- board ---------- */
+function addNote(msg, isNew) {
+  if (!msg || msg.event !== 'message' || notes.has(msg.id)) return;
+  let n; try { n = JSON.parse(msg.message); } catch (e) { return; }
+  if (!n || n.app !== 'hope-wall' || typeof n.text !== 'string' || !n.text.trim()) return;
+  notes.set(msg.id, { text: n.text.slice(0, 160), name: typeof n.name === 'string' ? n.name.slice(0, 40) : '', color: COLORS.includes(n.color) ? n.color : '--n1', rot: Math.max(-3, Math.min(3, +n.rot || 0)), time: msg.time || 0, fresh: isNew });
+  render();
+}
+function render() {
+  const list = [...notes.entries()].filter(([id]) => !hidden.has(id)).sort((a, b) => b[1].time - a[1].time);
+  $('empty').hidden = list.length > 0;
+  $('count').textContent = list.length ? `${list.length} note${list.length === 1 ? '' : 's'} so far` : '';
+  const board = $('board'); board.innerHTML = '';
+  list.forEach(([id, n]) => {
+    const el = document.createElement('article');
+    el.className = 'note' + (n.fresh ? ' new' : '');
+    n.fresh = false;
+    el.style.background = `var(${n.color})`;
+    el.style.setProperty('--rot', n.rot + 'deg');
+    const p = document.createElement('p'); p.textContent = n.text;
+    const by = document.createElement('div'); by.className = 'by';
+    const who = document.createElement('span'); who.textContent = n.name ? '— ' + n.name : '';
+    by.appendChild(who);
+    if (modMode) {
+      const x = document.createElement('button'); x.className = 'x'; x.textContent = '×'; x.setAttribute('aria-label', 'Hide this note on this screen');
+      x.onclick = () => { hidden.add(id); store.set('hiddenNotes', [...hidden]); render(); };
+      by.appendChild(x);
+    }
+    el.append(p, by); board.appendChild(el);
+  });
+}
+
+/* ---------- live connection ---------- */
+function connect() {
+  const es = new EventSource(BASE + '/sse?since=all');
+  let loadedAt = Date.now();
+  es.onopen = () => { ready = true; $('notice').hidden = true; };
+  es.onmessage = ev => { let m; try { m = JSON.parse(ev.data); } catch (e) { return; } addNote(m, Date.now() - loadedAt > 2500); };
+  es.onerror = () => { if (!ready) { $('notice').hidden = false; $('notice').textContent = 'Connecting to the wall… If this stays, check the internet connection.'; } };
+}
+connect();
+if (location.hash === '#write' || matchMedia('(max-width: 760px)').matches) openComposer();
+</script>
+</body>
+</html>
